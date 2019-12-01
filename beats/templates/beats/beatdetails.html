@@ -1,0 +1,32 @@
+<h1>{{beat.beat_name}}</h1>
+<br>
+<br>
+<img alt='Beat img' src='{{ beat.beat_img.url }}'>
+<br>
+<br>
+<audio controls>
+  <source src="{{beat.beat.url}}" type="audio/wav">
+  Your browser does not support the audio tag.
+</audio>
+<br>
+<br>
+<h2>Producer :- <h3>{{beat.producer}}</h3></h2>
+<br>
+<br>
+<h2>Genre:-<h3>{{beat.genre}}</h3></h2>
+<br>
+<br>
+<h2>What the Producer want to say about his/her work</h2>
+<br>
+<h3>{{beat.beat_desc}}</h3>
+<br>
+<br>
+<h1>Reviews</h1>
+{% for review in reviews %}
+  <h3>{{review.user.username}}</h3>
+  <h3>{{review.rating}}</h3>
+  <br>
+  <h4>{{review.comment}}</h4>
+  <br>
+  <br>
+{% endfor %}

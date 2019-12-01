@@ -1,0 +1,7 @@
+<h1>Login form</h1>
+    <form method='POST'>
+    {% csrf_token %}
+    {{form}}
+    <br>
+    <input type='submit' value='Login'>
+    </form>

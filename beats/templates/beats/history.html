@@ -1,0 +1,10 @@
+<h1>HISTORY</h1>
+<br>
+<br>
+{% for history in historys %}
+    <img alt='beat-img' src='{{history.Bid.beat_img.url}}'>
+    <br>
+    <h2>{{history.Bid.beat_name}}</h2>
+    <br>
+    <br>
+{% endfor %}

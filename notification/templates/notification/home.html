@@ -1,0 +1,9 @@
+<h1>Notifications</h1>
+{% for noti in notifications %}
+    <h3>Owner:-<h4>{{noti.owner_id.username}}</h4></h3>
+    <br>
+    <h4>Header:-<h5>{{noti.header}}</h5></h4>
+    <br>
+    <h5>{{noti.content}}</h5>
+
+{% endfor %}

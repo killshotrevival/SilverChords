@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<div>
+        <h1>Header Options</h1>
+        <img src="/media/cover1.jpg" alt="LaMusique Logo">
+        <br>
+        LaMusique.Com
+        <input type="text">
+        <button type="button" href="">Search</button> <br>
+        <button type="button" href="">Home</button>
+        <button type="button">Gallery</button>
+        <a href='{% url 'profile' %}'>Profile</a>
+        <a href='{% url 'logout' %}'>logout</a>
+        <a href={% url 'upload' %}>Upload</a>
+        <a href={% url 'history' %}>History</a>
+        <a href={% url 'notification' %}>Notification</a>
+        <select name="Direction Box" id="DB">
+            <option value="Profile">Profile</option>
+            <option value="Notification">Notification</option>
+            <option value="Beats You Bought">Beats You Bought</option>
+            <option value="Your Beats">Your Beats</option>
+            <option value="Hastags">Hastags You Follow</option>
+            <option value="History">History</option>
+            <option value="Legals">Legals</option>
+        </select>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+    {{message}}    
+    {% endfor %}
+    {% endif %}
+    {% block Main_Content %} {% endblock %}
+</body>
+</html>

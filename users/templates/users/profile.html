@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8">
+    <title>{{user.username}} Profile</title>
+</head>
+<body>
+<img alt="user profile" src="{{ user.profile.artist_photo.url }}">
+<img alt="user cover" src="{{ user.profile.cover_photo.url }}">
+<br>
+<br>
+<h1>{{user.username}}</h1>
+<br>
+<a href='{% url 'editinfo' %}'>Edit Profile</a>
+<br>
+<br>
+<a href='{% url 'home' %}'>Home</a>
+<br>
+<br>
+<h3>Badge:-</h3><h2>  {{user.profile.badge}}</h2>
+<br>
+<h3>Place:-</h3><h2>  {{user.profile.place}}</h2>
+<br>
+<h3>About:-</h3><h2>  {{user.profile.desc}}</h2>
+<br>
+<h3>Facebook:-</h3><h2>  {{user.profile.fb}}</h2>
+<br>
+<h3>Instagram:-</h3><h2>  {{user.profile.insta}}</h2>
+<br>
+<h3>Youtube:-</h3><h2>  {{user.profile.youtube}}</h2>
+<h1>Work</h1>
+<div>
+Work Section
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% if page_obj.has_previous %}
+    <a href='?page={{page_obj.previous_page_number}}'>Previous</a>
+{% endif %}
+
+{% if page_obj.has_next  %}
+    <a href='?page={{page_obj.next_page_number}}'>Next</a>    
+{% endif %}
+<br>
+<br>
+<h1>Beats</h1>
+{% for beat in beats %}
+    <img alt='beat-img' src='{{beat.beat_img.url}}' onclick="location.href='{% url 'beat-details' pk=beat.Bid %}'">
+    <br>
+    <audio>
+    <source src="{{beat.beat.url}}" type="audio/wav">
+    Your browser does not support the audio tag.
+    <!--As soon as the user presses the play button use AJAX to update the no. of listens on database-->
+    </audio>
+    <h2>Beat Name:-<h3>{{beat.beat_name}}</h3></h2>
+    <br>
+    <h2>Time:-<h3>{{beat.beat_date|date:'d M y'}}</h3></h2>
+    <br>
+    <h2>Listens:-<h3>{{beat.listens}}</h3><h2>
+    <br>
+    <br>
+{% endfor %}

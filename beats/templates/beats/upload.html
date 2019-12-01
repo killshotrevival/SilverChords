@@ -1,0 +1,19 @@
+<form action='.' method='POST' enctype="multipart/form-data" >
+{% csrf_token %}
+ <label for='beat'>Upload your file </label>
+ <input type='file' name='beat' accept='audio/*'>
+ <br>  
+ <label for='beat_name'>Beat Name</label>
+ <input type='text' name='beat_name' >
+ <br>
+ <label for='genre'>Genre</label>
+ <input type='text' name='genre'>
+ <br>
+ <label for='beat_desc'>What you want to say about ur work</label><br>
+ <input name='beat_desc' type='text'>
+ <br>
+ <label for='beat_img'>Thumbnail</label>
+ <input type='file' name='beat_img' accept='image/*'>
+ <br>
+ <input type='submit' value='Upload'>
+</form>
