@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect
 from .forms import beatupload
 from .models import work_info, reviews, Userhistory
+from users.models import quote
 from django import forms
 from django.views.generic import ListView, DetailView
 
 def home(request):
-    return render(request, 'beats/base.html')
+    quotea=quote.objects.order_by("?").first()
+    return render(request, 'beats/base.html.', {'quote':quotea})
+    
+def silverchords(request):
+    return render(request, 'beats/silverchords.html')
 
 
 def upload(request):

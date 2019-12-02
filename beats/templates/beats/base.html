@@ -6,10 +6,10 @@
 </head>
 <body>
 <div>
-        <h1>Header Options</h1>
-        <img src="/media/cover1.jpg" alt="LaMusique Logo">
+        <h1><u>SilverChords</u></h1>
+        <img src="/media/cover1.jpg" alt="LaMusique Logo" height='300' width='400'>
         <br>
-        LaMusique.Com
+        <h2>{{quote.data}}</h2>
         <input type="text">
         <button type="button" href="">Search</button> <br>
         <button type="button" href="">Home</button>
@@ -19,7 +19,7 @@
         <a href={% url 'upload' %}>Upload</a>
         <a href={% url 'history' %}>History</a>
         <a href={% url 'notification' %}>Notification</a>
-        <select name="Direction Box" id="DB">
+        <!--<select name="Direction Box" id="DB">
             <option value="Profile">Profile</option>
             <option value="Notification">Notification</option>
             <option value="Beats You Bought">Beats You Bought</option>
@@ -27,7 +27,7 @@
             <option value="Hastags">Hastags You Follow</option>
             <option value="History">History</option>
             <option value="Legals">Legals</option>
-        </select>
+        </select>-->
     </div>
     {% if messages %}
     {% for message in messages %}

@@ -4,6 +4,8 @@ from django.contrib import messages
 from .forms import registerform, InfoUpdateForm
 from django.contrib.auth.decorators import login_required
 from django import forms
+from .models import quote
+from django.contrib.auth import logout
 
 
 
@@ -15,11 +17,9 @@ def register(request):
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account Created for {username}!')
             return redirect('home')
-
     else:
         form = registerform()
         return render(request, 'users/register.html', {'form': form})
-        
 
 @login_required
 def profile(request):
@@ -36,3 +36,12 @@ def edit(request):
     else:
         form = InfoUpdateForm(instance=request.user.profile)
         return render(request, 'users/editinfo.html', {'form': form})
+
+
+
+def logout_view(request):
+    logout(request)
+    quotea=quote.objects.order_by("?").first()
+    return render(request, 'users/logout.html', {'quote':quotea})
+    # Redirect to a success page.
+    
