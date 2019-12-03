@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>Search Page</title>
+</head>
+<body>
+<h1><u>Search Page</u></h1>
+<br>
+<br>
+
+{% if work.count %}
+<h2>Beats</h2>
+{% for beat in work %}
+    <img alt="Beat Image" src='{{beat.beat_img.url}}'>
+    <br>
+    {{beat.beat_name}}
+    <br>
+    <audio controls>
+    <source src='{{beat.beat.url}}' type="audio/wav">
+    Your browser does not support the audio tag.
+    </audio>
+{% endfor %}
+{% endif %}
+<br>
+{% if genres.count %}
+<h2>Genres</h2>
+{% for beat in genres %}
+    <img alt="Beat Image" src='{{beat.beat_img.url}}'>
+    <br>
+    {{beat.beat_name}}
+    <br>
+    <audio controls>
+    <source src='{{beat.beat.url}}' type="audio/wav">
+    Your browser does not support the audio tag.
+    </audio>
+{% endfor %}
+{% endif %}
+<br>
+{% if users.count %}
+{% for user in users %}
+    <img alt="Users Image" src='{{user.profile.artist_photo.url}}'>
+    <br>
+    <h3>{{user.username}}</h3>
+    <h3>Badge:-{{user.profile.badge}}</h3>
+{% endfor %}
+{% else %}
+{% endif %}
+
+</body>
+</html>

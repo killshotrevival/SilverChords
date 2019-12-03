@@ -24,7 +24,7 @@ def register(request):
 @login_required
 def profile(request):
     return render(request, 'users/profile.html')
-
+@login_required
 def edit(request):
     if request.method=='POST':
         form1 = InfoUpdateForm(request.POST, request.FILES, instance=request.user.profile)
@@ -38,10 +38,8 @@ def edit(request):
         return render(request, 'users/editinfo.html', {'form': form})
 
 
-
 def logout_view(request):
     logout(request)
     quotea=quote.objects.order_by("?").first()
     return render(request, 'users/logout.html', {'quote':quotea})
-    # Redirect to a success page.
-    
+

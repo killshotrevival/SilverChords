@@ -11,5 +11,6 @@ urlpatterns = [
     path('upload/', views.upload, name='upload'),
     path('history/', views.HistoryNameList.as_view(), name='history'),
     path('beat/<int:pk>/', views.BeatDetailsView.as_view(), name='beat-details'),
+    path('search/', views.search,name='search'),
     path('beatlist/', views.BeatListView.as_view(), name='beat-list'), 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

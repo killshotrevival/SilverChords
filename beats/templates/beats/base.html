@@ -7,11 +7,12 @@
 <body>
 <div>
         <h1><u>SilverChords</u></h1>
-        <img src="/media/cover1.jpg" alt="LaMusique Logo" height='300' width='400'>
-        <br>
-        <h2>{{quote.data}}</h2>
-        <input type="text">
-        <button type="button" href="">Search</button> <br>
+        <img src="/media/cover1.jpg" alt="LaMusique Logo" height='30' width='40'>
+        <form action='{% url 'search' %}' method='POST'>
+        {% csrf_token %}
+        <input type='text' name='search_token' >
+        <input type='submit' value='Search'>
+        </form>
         <button type="button" href="">Home</button>
         <button type="button">Gallery</button>
         <a href='{% url 'profile' %}'>Profile</a>
@@ -19,6 +20,8 @@
         <a href={% url 'upload' %}>Upload</a>
         <a href={% url 'history' %}>History</a>
         <a href={% url 'notification' %}>Notification</a>
+        <br>
+        <h2>"{{quote.data}}"</h2>
         <!--<select name="Direction Box" id="DB">
             <option value="Profile">Profile</option>
             <option value="Notification">Notification</option>

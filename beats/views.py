@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from .forms import beatupload
 from .models import work_info, reviews, Userhistory
-from users.models import quote
+from users.models import quote, profile
 from django import forms
 from django.views.generic import ListView, DetailView
+from .forms import searchform
+from django.contrib.auth.models import User
 
 def home(request):
     quotea=quote.objects.order_by("?").first()
@@ -11,6 +13,19 @@ def home(request):
     
 def silverchords(request):
     return render(request, 'beats/silverchords.html')
+
+def search(request):
+    if request.method=='POST':
+        form = searchform(request.POST)
+        if form.is_valid():
+            search = form.cleaned_data.get('search_token')
+            work = work_info.objects.filter(beat_name__contains=search)
+            genres = work_info.objects.filter(genre__contains=search)
+            user = User.objects.filter(username__contains=search)
+            return render(request, 'beats/search.html', {'work':work, 'genres':genres, 'users':user})
+    else:
+        return render(request, 'beats/base.html')
+
 
 
 def upload(request):
