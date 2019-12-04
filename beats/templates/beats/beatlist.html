@@ -12,7 +12,7 @@
     <img alt='beat-img' src='{{beat.beat_img.url}}' onclick="location.href='{% url 'beat-details' pk=beat.Bid %}'">
     <br>
     <audio>
-    <source src="{{beat.beat.url}}" type="audio/wav">
+    <source src="{{beat.beat.url}}" type="audio/wav" >
     Your browser does not support the audio tag.
     <!--As soon as the user presses the play button use AJAX to update the no. of listens on database-->
     </audio>

@@ -12,21 +12,33 @@
 {% if work.count %}
 <h2>Beats</h2>
 {% for beat in work %}
-    <img alt="Beat Image" src='{{beat.beat_img.url}}'>
+    <img alt="Beat Image" src='{{beat.beat_img.url}}' onclick="location.href='{% url 'beat-details' pk=beat.Bid %}'">
     <br>
-    {{beat.beat_name}}
+    <h3>{{beat.beat_name}}</h3>
     <br>
-    <audio controls>
-    <source src='{{beat.beat.url}}' type="audio/wav">
+    <!--<audio controls onclick="location.href='{% url 'listensupdate' pk=beat.Bid %}'">
+    <source src='{{beat.beat.url}}' type="audio/wav" onclick="location.href='{% url 'listensupdate' pk=beat.Bid %}'">
     Your browser does not support the audio tag.
-    </audio>
+    </audio>-->
+    <script type="text/javascript">
+        function Play_Audio(){
+        var audioElement = document.createElement("audio");
+        audioElement.src = '{{beat.beat.url}}'
+        document.getElementById("Play_Button").addEventListener("click", function(music){
+        audioElement.play();
+  }, false);
+}
+Play_Audio();
+</script>
+<button id="Play_Button">Play</button>
+
 {% endfor %}
 {% endif %}
 <br>
 {% if genres.count %}
 <h2>Genres</h2>
 {% for beat in genres %}
-    <img alt="Beat Image" src='{{beat.beat_img.url}}'>
+    <img alt="Beat Image" src='{{beat.beat_img.url}}' onclick="location.href='{% url 'beat-details' pk=beat.Bid %}'" >
     <br>
     {{beat.beat_name}}
     <br>
@@ -38,8 +50,9 @@
 {% endif %}
 <br>
 {% if users.count %}
+<h2>Users</h2>
 {% for user in users %}
-    <img alt="Users Image" src='{{user.profile.artist_photo.url}}'>
+    <img alt="Users Image" src='{{user.profile.artist_photo.url}}' onclick="location.href='{% url 'userinfo' pk=user.id %}'">
     <br>
     <h3>{{user.username}}</h3>
     <h3>Badge:-{{user.profile.badge}}</h3>

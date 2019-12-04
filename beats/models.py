@@ -15,6 +15,9 @@ class work_info(models.Model):
 
     def __str__(self):
         return self.beat_name
+    
+    def listens_update(self):
+        self.listens=self.listens+1
 
 class reviews(models.Model):
     review_id = models.AutoField(primary_key=True)

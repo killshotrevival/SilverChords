@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'users.apps.UsersConfig',
+    'dajax',
+    'dajaxice',
     'beats.apps.BeatsConfig',
     'notification.apps.NotificationConfig',
     'django.contrib.auth',

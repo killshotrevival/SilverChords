@@ -26,7 +26,10 @@ def search(request):
     else:
         return render(request, 'beats/base.html')
 
-
+def listensupdate(request,pk):
+    query = work_info.objects.filter(Bid=pk)
+    query.listens_update()
+    
 
 def upload(request):
     if request.method=='POST':

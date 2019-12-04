@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django import forms
 from .models import quote
 from django.contrib.auth import logout
+from django.views.generic import DetailView
+from django.contrib.auth.models import User
+
 
 
 
@@ -43,3 +46,8 @@ def logout_view(request):
     quotea=quote.objects.order_by("?").first()
     return render(request, 'users/logout.html', {'quote':quotea})
 
+
+class UserDetailsView(DetailView):
+    model = User
+    template_name = 'users/infouser.html'
+    context_object_name = 'user'
