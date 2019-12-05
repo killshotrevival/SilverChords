@@ -8,19 +8,38 @@
 <br>
 <br>
 <h1>Beats</h1>
+<br>
+<audio controls id='cntl'>
+    <source src="" type="audio/wav" >
+    Your browser does not support the audio tag.
+</audio>
 {% for beat in beats %}
     <img alt='beat-img' src='{{beat.beat_img.url}}' onclick="location.href='{% url 'beat-details' pk=beat.Bid %}'">
     <br>
-    <audio>
-    <source src="{{beat.beat.url}}" type="audio/wav" >
-    Your browser does not support the audio tag.
-    <!--As soon as the user presses the play button use AJAX to update the no. of listens on database-->
-    </audio>
     <h2>Beat Name:-<h3>{{beat.beat_name}}</h3></h2>
+    <button id='Play_Button' onclick="play()">Playsss</button>
     <br>
     <h2>Time:-<h3>{{beat.beat_date|date:'d M y'}}</h3></h2>
     <br>
     <h2>Listens:-<h3>{{beat.listens}}</h3><h2>
+        <br>
+    
+    <script type="text/javascript">
+                function play()
+                {
+                    var audio = document.getElementById("cntl")
+                    audio.src= "{{beat.beat.url}}";
+                    audio.load();
+                    audio.play();
+
+                    var a = parseInt({{beat.Bid}});
+                    $.ajax({
+                    url : '{% url 'playsong' %}', // the endpoint
+                    type : "POST", // http method
+                    data : { csrfmiddlewaretoken: '{{ csrf_token }}',
+                        'Bid' : a },
+                    });}
+    </script>
     <br>
     <br>
 {% endfor %}

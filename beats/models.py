@@ -18,6 +18,7 @@ class work_info(models.Model):
     
     def listens_update(self):
         self.listens=self.listens+1
+        self.save()
 
 class reviews(models.Model):
     review_id = models.AutoField(primary_key=True)

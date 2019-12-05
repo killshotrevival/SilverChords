@@ -4,9 +4,9 @@
 <img alt='Beat img' src='{{ beat.beat_img.url }}'>
 <br>
 <br>
-<audio controls>
-  <source src="{{beat.beat.url}}" type="audio/wav">
-  Your browser does not support the audio tag.
+<audio controls id='cntl'>
+    <source src="" type="audio/wav" >
+    Your browser does not support the audio tag.
 </audio>
 <br>
 <br>
@@ -29,4 +29,20 @@
   <h4>{{review.comment}}</h4>
   <br>
   <br>
+  <script type="text/javascript">
+                function play()
+                {
+                    var audio = document.getElementById("cntl")
+                    audio.src= "{{beat.beat.url}}";
+                    audio.load();
+                    audio.play();
+
+                    var a = parseInt({{beat.Bid}});
+                    $.ajax({
+                    url : '{% url 'playsong' %}', // the endpoint
+                    type : "POST", // http method
+                    data : { csrfmiddlewaretoken: '{{ csrf_token }}',
+                        'Bid' : a },
+                    });}
+    </script>
 {% endfor %}

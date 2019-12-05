@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 from .forms import beatupload
 from .models import work_info, reviews, Userhistory
@@ -5,6 +6,7 @@ from users.models import quote, profile
 from django import forms
 from django.views.generic import ListView, DetailView
 from .forms import searchform
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 
 def home(request):
@@ -30,6 +32,17 @@ def listensupdate(request,pk):
     query = work_info.objects.filter(Bid=pk)
     query.listens_update()
     
+def playsonng(request):
+    if request.method =='POST':
+        id = request.POST.get('Bid')
+        work = work_info.objects.filter(Bid = id)
+        f = work[0].listens
+        print(f)
+        work[0].listens_update()
+        return HttpResponse("Success")
+    else:
+        return HttpResponse("Failure")
+
 
 def upload(request):
     if request.method=='POST':
