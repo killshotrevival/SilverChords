@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from rest_framework import serializers
 
 class work_info(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -19,6 +20,7 @@ class work_info(models.Model):
     def listens_update(self):
         self.listens=self.listens+1
         self.save()
+        
 
 class reviews(models.Model):
     review_id = models.AutoField(primary_key=True)

@@ -1,3 +1,4 @@
+{% load static %}
 {% if page_obj.has_previous %}
     <a href='?page={{page_obj.previous_page_number}}'>Previous</a>
 {% endif %}
@@ -5,6 +6,9 @@
 {% if page_obj.has_next  %}
     <a href='?page={{page_obj.next_page_number}}'>Next</a>    
 {% endif %}
+<script type='text/javascript' src='{% static 'play.js' %}'></script>
+<script type='text/javascript' src='{% static 'main.js' %}'></script>
+
 <br>
 <br>
 <h1>Beats</h1>
@@ -17,29 +21,13 @@
     <img alt='beat-img' src='{{beat.beat_img.url}}' onclick="location.href='{% url 'beat-details' pk=beat.Bid %}'">
     <br>
     <h2>Beat Name:-<h3>{{beat.beat_name}}</h3></h2>
-    <button id='Play_Button' onclick="play()">Playsss</button>
+    <button id='Play_Button' onclick="play('{{beat.beat.url}}', '{{beat.Bid}}','{% url 'playsong' %}')">Playsss</button>
     <br>
     <h2>Time:-<h3>{{beat.beat_date|date:'d M y'}}</h3></h2>
     <br>
     <h2>Listens:-<h3>{{beat.listens}}</h3><h2>
         <br>
     
-    <script type="text/javascript">
-                function play()
-                {
-                    var audio = document.getElementById("cntl")
-                    audio.src= "{{beat.beat.url}}";
-                    audio.load();
-                    audio.play();
-
-                    var a = parseInt({{beat.Bid}});
-                    $.ajax({
-                    url : '{% url 'playsong' %}', // the endpoint
-                    type : "POST", // http method
-                    data : { csrfmiddlewaretoken: '{{ csrf_token }}',
-                        'Bid' : a },
-                    });}
-    </script>
     <br>
     <br>
 {% endfor %}

@@ -36,12 +36,15 @@ def playsonng(request):
     if request.method =='POST':
         id = request.POST.get('Bid')
         work = work_info.objects.filter(Bid = id)
-        f = work[0].listens
-        print(f)
         work[0].listens_update()
         return HttpResponse("Success")
     else:
         return HttpResponse("Failure")
+
+def historydetail(request,pk):
+        #id = request.POST.get('Bid')
+        work = work_info.objects.filter(Bid = pk)
+        return render(request, 'beats/beatdetails.html', {'beat':work[0]})
 
 
 def upload(request):

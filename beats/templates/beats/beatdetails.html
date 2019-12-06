@@ -2,10 +2,11 @@
 <br>
 <br>
 <img alt='Beat img' src='{{ beat.beat_img.url }}'>
+<button id='Play_Button' onclick="play()">Playsss</button>
 <br>
 <br>
 <audio controls id='cntl'>
-    <source src="" type="audio/wav" >
+    <source src="{{beat.beat.url}}" type="audio/wav" >
     Your browser does not support the audio tag.
 </audio>
 <br>
