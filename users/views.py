@@ -8,8 +8,9 @@ from .models import quote
 from django.contrib.auth import logout
 from django.views.generic import DetailView
 from django.contrib.auth.models import User
-
-
+from beats.models import work_info
+from notification.models import notification
+from .forms import NotifyForm
 
 
 def register(request):
@@ -26,7 +27,8 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    beats = work_info.objects.filter(user_id=request.user.id)
+    return render(request, 'users/profile.html', {'beats': beats})
 @login_required
 def edit(request):
     if request.method=='POST':
@@ -51,3 +53,21 @@ class UserDetailsView(DetailView):
     model = User
     template_name = 'users/infouser.html'
     context_object_name = 'user'
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs.get('pk')
+        context = super().get_context_data(**kwargs)
+        context["beats"] = work_info.objects.filter(user_id=pk)
+        return context
+
+def notifi(request,pk):
+    if request.method == 'POST':
+        form = NotifyForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data.get('data')
+            header1 = form.cleaned_data.get('header')
+            user = User.objects.filter(id=pk).first()
+            print(user.id)
+            noti = notification(user_id=request.user.id, owner_id=user, header=header1, contect=data)
+            noti.save()
+            return render(request, 'notification/confirm.html')
+

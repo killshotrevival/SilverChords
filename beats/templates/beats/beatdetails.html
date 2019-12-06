@@ -1,12 +1,17 @@
+{% load static %}
+
+<script src="{% static "main.js" %}" type='text/javascript'></script>
+<script type="text/javascript" src="{% static "play.js" %}"></script>
+
 <h1>{{beat.beat_name}}</h1>
 <br>
 <br>
 <img alt='Beat img' src='{{ beat.beat_img.url }}'>
-<button id='Play_Button' onclick="play()">Playsss</button>
+<button id='Play_Button' onclick="play('{{beat.beat.url}}', '{{beat.Bid}}', '{% url 'playsong' %}')">Playsss</button>
 <br>
 <br>
 <audio controls id='cntl'>
-    <source src="{{beat.beat.url}}" type="audio/wav" >
+    <source src="" type="audio/wav" >
     Your browser does not support the audio tag.
 </audio>
 <br>
@@ -30,20 +35,4 @@
   <h4>{{review.comment}}</h4>
   <br>
   <br>
-  <script type="text/javascript">
-                function play()
-                {
-                    var audio = document.getElementById("cntl")
-                    audio.src= "{{beat.beat.url}}";
-                    audio.load();
-                    audio.play();
-
-                    var a = parseInt({{beat.Bid}});
-                    $.ajax({
-                    url : '{% url 'playsong' %}', // the endpoint
-                    type : "POST", // http method
-                    data : { csrfmiddlewaretoken: '{{ csrf_token }}',
-                        'Bid' : a },
-                    });}
-    </script>
 {% endfor %}

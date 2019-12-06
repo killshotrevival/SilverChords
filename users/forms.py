@@ -15,3 +15,8 @@ class InfoUpdateForm(forms.ModelForm):
     class Meta:
         model = profile
         fields = ['artist_photo', 'cover_photo', 'place', 'desc', 'fb', 'insta']
+
+class NotifyForm(forms.Form):
+    data = forms.CharField(max_length=200, label='data')
+    header = forms.CharField(max_length=200, label='header')
+

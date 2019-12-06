@@ -27,14 +27,10 @@
     <br>
     <h1>{{beat.Bid}}</h1>
     <br>
-    <button id='Play_Button' onclick="play('{{beat.beat.url}}', '{{beat.Bid}}', '{% url 'playsong' %}')"  data-url="{% url 'playsong' %}">Playsss</button>
-
-    
+    <button id='Play_Button' onclick="play('{{beat.beat.url}}', '{{beat.Bid}}', '{% url 'playsong' %}')" >Playsss</button>
 {% endfor %}
 {% endif %}
 <br>
-
-
 {% if genres.count %}
 <h2>Genres</h2>
 {% for beat in genres %}
@@ -43,23 +39,6 @@
     {{beat.beat_name}}
     <br>
     <button id='Play_Button' onclick="play('{{beat.beat.url}}', '{{beat.Bid}}','{% url 'playsong' %}')">Playsss</button>
-    
-    <!--<script type="text/javascript">
-                function play(beatl,Bid)
-                {
-                    var audio = document.getElementById("cntl")
-                    audio.src= beatl;
-                    audio.load();
-                    audio.play();
-
-                    var a = parseInt(Bid);
-                    $.ajax({
-                    url : '{% url 'playsong' %}', // the endpoint
-                    type : "POST", // http method
-                    data : { csrfmiddlewaretoken: '{{ csrf_token }}',
-                        'Bid' : a },
-                    });}
-    </script>-->
 {% endfor %}
 {% endif %}
 <br>

@@ -1,3 +1,6 @@
+#user_id is the id of the reciever 
+#owner_id is the id of sender
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -11,4 +14,4 @@ class notification(models.Model):
     contect = models.TextField(max_length=2000)
 
     def __str__(self):
-        return f'{self.owner_id.username} sends {self.user.username}'
+        return f'{self.user.username} sends {self.owner_id.username}'
