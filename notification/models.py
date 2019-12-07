@@ -1,5 +1,5 @@
-#user_id is the id of the reciever 
-#owner_id is the id of sender
+#user_id is the id of the sender 
+#owner_id is the id of the reciever
 
 from django.db import models
 from django.contrib.auth.models import User

@@ -66,7 +66,6 @@ def notifi(request,pk):
             data = form.cleaned_data.get('data')
             header1 = form.cleaned_data.get('header')
             user = User.objects.filter(id=pk).first()
-            print(user.id)
             noti = notification(user_id=request.user.id, owner_id=user, header=header1, contect=data)
             noti.save()
             return render(request, 'notification/confirm.html')
