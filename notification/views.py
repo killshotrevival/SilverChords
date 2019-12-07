@@ -3,7 +3,11 @@ from .models import notification
 from django.views.generic import ListView
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
+
+@method_decorator(login_required, name='dispatch')
 class notificationListView(ListView):
     model = notification
     template_name = 'notification/home.html'
@@ -16,7 +20,7 @@ class notificationListView(ListView):
             'notifications' : con
         }
         return context
-
+@login_required
 def notidata(request):
     if request.method == 'POST':
         name = request.POST.get('username')

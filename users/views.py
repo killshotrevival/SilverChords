@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import registerform, InfoUpdateForm
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django import forms
 from .models import quote
 from django.contrib.auth import logout
@@ -21,6 +22,9 @@ def register(request):
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account Created for {username}!')
             return redirect('home')
+        else:
+            error = form.errors
+            return render(request, 'users/register.html', {'form': form, 'error': error})
     else:
         form = registerform()
         return render(request, 'users/register.html', {'form': form})
@@ -29,6 +33,7 @@ def register(request):
 def profile(request):
     beats = work_info.objects.filter(user_id=request.user.id)
     return render(request, 'users/profile.html', {'beats': beats})
+
 @login_required
 def edit(request):
     if request.method=='POST':
@@ -48,7 +53,7 @@ def logout_view(request):
     quotea=quote.objects.order_by("?").first()
     return render(request, 'users/logout.html', {'quote':quotea})
 
-
+@method_decorator(login_required, name='dispatch')
 class UserDetailsView(DetailView):
     model = User
     template_name = 'users/infouser.html'
@@ -59,6 +64,7 @@ class UserDetailsView(DetailView):
         context["beats"] = work_info.objects.filter(user_id=pk)
         return context
 
+@login_required
 def notifi(request,pk):
     if request.method == 'POST':
         form = NotifyForm(request.POST)

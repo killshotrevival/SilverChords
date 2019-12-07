@@ -4,11 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import profile
 
 class registerform(UserCreationForm):
-    email = forms.EmailField()
-
     class meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'password1', 'password2']
 
 
 class InfoUpdateForm(forms.ModelForm):

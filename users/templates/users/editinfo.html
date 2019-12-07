@@ -1,15 +1,14 @@
+{% extends "beats/base.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='UTF-8'>
-<title>Edit Profile</title>
-<body>
-<h1>Edit Info Page</h1>
-<form action='.' method='POST' enctype="multipart/form-data">
-{% csrf_token %}
-{{form.as_p}}
-<input type='submit' value='Save'>
-</form>
-</body>
-</html>
+{% block title %}
+    EDIT PERSONAL INFO
+{% endblock title %}
+
+{% block Main_Content %}
+    <h1>Edit Info Page</h1>
+    <form action='.' method='POST' enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type='submit' value='Save'>
+    </form>
+{% endblock Main_Content %}

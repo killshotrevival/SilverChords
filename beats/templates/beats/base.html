@@ -15,28 +15,18 @@
         </form>
         <button type="button" href="">Home</button>
         <button type="button">Gallery</button>
-        <a href='{% url 'profile' %}'>Profile</a>
-        <a href='{% url 'logout' %}'>logout</a>
-        <a href={% url 'upload' %}>Upload</a>
-        <a href={% url 'history' %}>History</a>
-        <a href={% url 'notification' %}>Notification</a>
-        <br>
-        <h2>"{{quote.data}}"</h2>
-        <!--<select name="Direction Box" id="DB">
-            <option value="Profile">Profile</option>
-            <option value="Notification">Notification</option>
-            <option value="Beats You Bought">Beats You Bought</option>
-            <option value="Your Beats">Your Beats</option>
-            <option value="Hastags">Hastags You Follow</option>
-            <option value="History">History</option>
-            <option value="Legals">Legals</option>
-        </select>-->
+        <button type="button" onclick="location.href='{% url 'profile' %}'">Profile</button>
+        <button type="button" onclick="location.href='{% url 'logout' %}'">Logout</button>
+        <button type="button" onclick="location.href='{% url 'upload' %}'">Upload</button>
+        <button type="button" onclick="location.href='{% url 'notification' %}'">Notification</button>
     </div>
-    {% if messages %}
-    {% for message in messages %}
-    {{message}}    
-    {% endfor %}
-    {% endif %}
-    {% block Main_Content %} {% endblock %}
+    <div>
+        {% if messages %}
+        {% for message in messages %}
+        {{message}}    
+        {% endfor %}
+        {% endif %}
+        {% block Main_Content %} {% endblock %}
+    </div>
 </body>
 </html>

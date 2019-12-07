@@ -8,14 +8,19 @@ from django.views.generic import ListView, DetailView
 from .forms import searchform
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
+@login_required
 def home(request):
     quotea=quote.objects.order_by("?").first()
-    return render(request, 'beats/base.html.', {'quote':quotea})
-    
+    return render(request, 'beats/silverchords_home.html.', {'quote':quotea})
+
+@login_required    
 def silverchords(request):
     return render(request, 'beats/silverchords.html')
 
+@login_required
 def search(request):
     if request.method=='POST':
         form = searchform(request.POST)
@@ -24,14 +29,16 @@ def search(request):
             work = work_info.objects.filter(beat_name__contains=search)
             genres = work_info.objects.filter(genre__contains=search)
             user = User.objects.filter(username__contains=search)
-            return render(request, 'beats/search.html', {'work':work, 'genres':genres, 'users':user})
+            return render(request, 'beats/search.html', {'work':work, 'genres':genres, 'users':user, 'name':search})
     else:
         return render(request, 'beats/base.html')
 
+@login_required
 def listensupdate(request,pk):
     query = work_info.objects.filter(Bid=pk)
     query.listens_update()
     
+@login_required
 def playsonng(request):
     if request.method =='POST':
         id = request.POST.get('Bid')
@@ -41,12 +48,13 @@ def playsonng(request):
     else:
         return HttpResponse("Failure")
 
+@login_required
 def historydetail(request,pk):
         #id = request.POST.get('Bid')
         work = work_info.objects.filter(Bid = pk)
         return render(request, 'beats/beatdetails.html', {'beat':work[0]})
 
-
+@login_required
 def upload(request):
     if request.method=='POST':
         form1 = beatupload(request.POST, request.FILES)
@@ -62,6 +70,7 @@ def upload(request):
        # form = beatupload()
         return render(request, 'beats/upload.html')
 
+@method_decorator(login_required, name='dispatch')
 class BeatListView(ListView):
     model = work_info
     template_name = 'beats/beatlist.html'
@@ -70,6 +79,7 @@ class BeatListView(ListView):
     ordering = ['-beat_date']
     paginate_by = 3
 
+@method_decorator(login_required, name='dispatch')
 class BeatDetailsView(DetailView):
     model = work_info
     template_name = 'beats/beatdetails.html'
@@ -80,6 +90,7 @@ class BeatDetailsView(DetailView):
         context["reviews"] = reviews.objects.filter(Bid=pk)
         return context
 
+@method_decorator(login_required, name='dispatch')
 class HistoryNameList(ListView):
     model = Userhistory
     #context_object_name = 'historys'

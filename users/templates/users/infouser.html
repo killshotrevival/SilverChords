@@ -1,53 +1,62 @@
 <!--Yet to update Facebook, insta, youtibe links-->
 
 {% load static %}
-<script type='text/javascript' src='{% static 'play.js' %}'></script>
-<script type='text/javascript' src='{% static 'main.js' %}'></script>
+{% extends "beats/base.html" %}
 
-<h2><u>{{user.username}}</u></h2>
-<br>
-<img alt='User Cover Photo' src='{{user.profile.cover_photo.url}}' height='300' width='400'>
-<br>
-<img alt='User Cover Photo' src='{{user.profile.artist_photo.url}}' height='200' width='300'>
-<br>
-<h3>Nationality:-{{user.profile.place}}</h3>
-<br>
-<h3>Badge:-{{user.profile.badge}}</h3>
-<br>
-<h3>About:-</h3>
-<p>{{user.profile.desc}}</p>
-<br>
+{% block title %}
+    {{user.username}} Profile
+{% endblock title %}
 
-<a href='/'>Facebook</a>
-<a href='/'>Instagram</a>
-<a href='/'>Youtube</a>
-<br>
-<h2><u>Leave a message</u></h2>
-<div>
-<form method='POST' action='{% url 'notify' pk=user.id %}'>
-{% csrf_token %}
-<h3>Your message here:-</h3>
-    <label for='header'>header</label>
-    <input type='text' id='header' name='header'>
-    <label for='data'>Context</label>
-    <textarea rows="4" cols="50" id='data' name='data'></textarea>
-<input type='submit' value='Send'>
-</form>
-</div>
-<h2><u>Work Info</u></h2>
-<br>
-<audio controls id='cntl'>
-    <source src="" type="audio/wav" >
-    Your browser does not support the audio tag.
-</audio><br>
-{% for beat in beats %}
-    <img alt="Beat Img" src='{{beat.beat_img.url}}' height='200' width='200'>
+{% block Main_Content %}
+    <script type='text/javascript' src='{% static 'play.js' %}'></script>
+    <script type='text/javascript' src='{% static 'main.js' %}'></script>
+
+    <h2><u>{{user.username}}</u></h2>
     <br>
-    <h3>Name:-{{beat.beat_name}}</h3>
+    <img alt='User Cover Photo' src='{{user.profile.cover_photo.url}}' height='300' width='400'>
     <br>
-    <h3>Listens:-{{beat.listens}}</h3>
+    <img alt='User Cover Photo' src='{{user.profile.artist_photo.url}}' height='200' width='300'>
     <br>
-    <button id='Play_Button' onclick="play('{{beat.beat.url}}', '{{beat.Bid}}','{% url 'playsong' %}')">Playsss</button>
+    <h3>Nationality:-{{user.profile.place}}</h3>
     <br>
+    <h3>Badge:-{{user.profile.badge}}</h3>
     <br>
-{% endfor %}
+    <h3>About:-</h3>
+    <p>{{user.profile.desc}}</p>
+    <br>
+
+    <a href='/'>Facebook</a>
+    <a href='/'>Instagram</a>
+    <a href='/'>Youtube</a>
+    <br>
+    <h2><u>Leave a message</u></h2>
+    <div>
+    <form method='POST' action='{% url 'notify' pk=user.id %}'>
+    {% csrf_token %}
+    <h3>Your message here:-</h3>
+        <label for='header'>header</label>
+        <input type='text' id='header' name='header'>
+        <label for='data'>Context</label>
+        <textarea rows="4" cols="50" id='data' name='data'></textarea>
+    <input type='submit' value='Send'>
+    </form>
+    </div>
+    <h2><u>Work Info</u></h2>
+    <br>
+    <audio controls id='cntl'>
+        <source src="" type="audio/wav" >
+        Your browser does not support the audio tag.
+    </audio><br>
+    {% for beat in beats %}
+        <img alt="Beat Img" src='{{beat.beat_img.url}}' height='200' width='200'>
+        <br>
+        <h3>Name:-{{beat.beat_name}}</h3>
+        <br>
+        <h3>Listens:-{{beat.listens}}</h3>
+        <br>
+        <button id='Play_Button' onclick="play('{{beat.beat.url}}', '{{beat.Bid}}','{% url 'playsong' %}')">Playsss</button>
+        <br>
+        <br>
+    {% endfor %}
+
+{% endblock Main_Content %}

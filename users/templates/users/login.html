@@ -1,12 +1,22 @@
-<h1>Login form</h1>
-    <form method='POST'>
-    {% csrf_token %}
-    {{form}}
-    <br>
-    <input type='submit' value='Login'>
-    </form>
-<h2>Don't have an account?? No Worry create one:)<h2>
-<a href='{% url 'register' %}'>SignUp with Us.</a>
-<br>
-<br>
-<img alt='Login Page Image' src='/media/user21.jpg'>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8'>
+        <title>SilverChords Login</title>
+    </head>
+    <body>
+        <h1>Login form</h1>
+        <form method='POST'>
+        {% csrf_token %}
+        {{form}}
+        <br>
+        <input type='submit' value='Login'>
+        </form>
+        <h2>Don't have an account?? No Worry create one:)<h2>
+        <a href='{% url 'register' %}'>SignUp with Us.</a>
+        <br>
+        <br>
+        <img alt='Login Page Image' src='/media/user21.jpg'>
+
+    </body>
+</html>
