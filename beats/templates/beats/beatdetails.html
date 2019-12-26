@@ -39,7 +39,7 @@
 				<!-- Menu -->
 					<nav id="menu">
 						<div class="inner">
-							<h2><a style=" text-decoration:none; font-size:15px; font-family:cursive;" href="#menu">Your Cart <i class="fa fa-shopping-cart" style="font-size:36px; "></i><strong style='margin-bottom:20px;'>{{count}}<strong></a></h2>
+							<h2><a style=" text-decoration:none; font-size:15px; font-family:cursive;" href="{% url 'detailcart' %}">Your Cart <i class="fa fa-shopping-cart" style="font-size:36px; "></i><strong style='margin-bottom:20px;'>{{count}}<strong></a></h2>
 							<ul class="links">
 								<li><a class='text-white' style='text-decoration: none; font-family:cursive; ' href="{% url 'home' %}">Home</a></li>
 								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'gallery' %}">Gallery</a></li>

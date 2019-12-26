@@ -223,3 +223,18 @@ def beatcart(request,pk):
     rev = reviews.objects.filter(Bid=pk).order_by('-review_id')
     return render(request, 'beats/beatdetails.html', {'reviews':rev, 'beat':w[0], 'form':form1, 'count':count, 'ncount':nc.count()})
 
+
+def cartdetails(request):
+    count=0
+    final=0
+    c2 = cart.objects.filter(user_id=request.user.id)
+    nc = notifi.objects.filter(owner_id=request.user.id)
+    for i in c2:
+        count = count+i.itemcount
+        final = final+((i.price)*(i.itemcount))
+    return render(request, 'beats/cart.html', {'beats':c2, 'count':count, 'ncount':nc.count(), 'final':final})
+
+
+def cartdelete(request, pk):
+    cart.objects.filter(user_id=request.user.id, Bid=pk).delete()
+    return redirect('detailcart')

@@ -85,5 +85,4 @@ class cart(models.Model):
 
     def coutninc(self):
         self.itemcount = self.itemcount+1
-        self.save()
-    
+        self.save()    

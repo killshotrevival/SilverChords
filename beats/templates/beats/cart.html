@@ -1,0 +1,33 @@
+{% extends "beats/base.html" %}
+
+{% load static %}
+
+{% block title %}
+ Cart Details
+{% endblock title %}
+
+{% block Main_Content %}
+
+<p class='' style=' margin-left:200px; font-family:cursive; display:inline; font-size: 1.5em;'>Your final total</p> <p style='display:inline; margin-left:10px; font-size:3em;'>  {{final}}</p><p style='display:inline;font-size:1.5em; font-family:cursive;'> for {{count}} item/s shopping</p>
+
+<br><br><p class='' style='margin-left:370px; font-family:cursive; font-size: 1.5em;'>Cart Items</p><br>
+
+{% for beat in beats %}
+    <div style='padding:10px; border:2px solid white; width:700px; margin-left:100px;'>
+
+        <div style='display:inline;'>
+            <img alt='Beat Image' src='{{beat.Bid.beat_img.url}}' style='height:70px; width:70px; display:inline; '>
+            
+            <p class='' style='font-family:cursive; font-size: 1.5em; margin-bottom:10px;'> Item Name:- {{beat.Bid.beat_name}}</p>
+            <p class='' style=' display:inline; font-family:cursive; font-size: 1em;'>Price:-   </p>
+            <p class='' style=' display:inline; font-family:cursive; font-size: 1.5em;'>   {{beat.price}}*{{beat.itemcount}}</p>
+            <p class='' style='display:inline; font-family:cursive; font-size: 1.5em;'> = {% widthratio beat.price 1 beat.itemcount %}</p>
+            <a href="{% url 'deletecart' beat.Bid.Bid %}" class="btn btn-primary a-btn-slide-text" style='display:inline; margin-left:440px;'>
+                <span><strong>Delete</strong></span>            
+            </a>
+        </div>
+    
+    </div><br>
+{% endfor %}
+
+{% endblock Main_Content %}

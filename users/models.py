@@ -15,10 +15,10 @@ class profile(models.Model):
     verified = models.BooleanField(default=False)
     veri_submit = models.BooleanField(default=False)
 
+
     def verichange(self):
         self.veri_submit=True
         self.save()
-
 
     def __str__(self):
         return f'{self.user.username} Profile'
