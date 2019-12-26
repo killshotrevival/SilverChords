@@ -1,32 +1,110 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset='UTF-8'>
-<title>{% block title %}{% endblock %}</title>
-</head>
-<body>
-<div>
-        <h1><u>SilverChords</u></h1>
-        <img src="/media/cover1.jpg" alt="LaMusique Logo" height='30' width='40'>
-        <form action='{% url 'search' %}' method='POST'>
-        {% csrf_token %}
-        <input type='text' name='search_token' >
-        <input type='submit' value='Search'>
-        </form>
-        <button type="button" href="">Home</button>
-        <button type="button">Gallery</button>
-        <button type="button" onclick="location.href='{% url 'profile' %}'">Profile</button>
-        <button type="button" onclick="location.href='{% url 'logout' %}'">Logout</button>
-        <button type="button" onclick="location.href='{% url 'upload' %}'">Upload</button>
-        <button type="button" onclick="location.href='{% url 'notification' %}'">Notification</button>
-    </div>
-    <div>
-        {% if messages %}
-        {% for message in messages %}
-        {{message}}    
-        {% endfor %}
-        {% endif %}
-        {% block Main_Content %} {% endblock %}
-    </div>
-</body>
+	<head>
+		<title>{% block title %} Home {% endblock %}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href='{% static 'boot/css/bootstrap.min.css' %}' type="text/css" />
+		<script src='{% static 'main.js' %}' type="text/javascript"></script>
+		<script src='{% static 'play.js' %}' type="text/javascript"></script>
+		<script src='{% static 'searchi.js' %}' type="text/javascript"></script>
+		<script src='{% static 'boot/js/bootstrap.min.js' %}' type="text/javascript"></script>
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<link rel="stylesheet" href="{% static 'assets/css/main1.css' %}" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+
+	</head>
+
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a style='text-decoration: none; font-style: italic; text-transform:lowercase;' href="{% url 'silverchords' %}">silverchords.com</a></h1>
+
+						<nav>
+						{% if ncount or count %}  
+							<a href="#menu">Menu <i class="fas fa-circle" style='color:#FE1414'></i></a>
+						{% else %}
+							<a href="#menu">Menu</a>
+						{% endif %}
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2><a style=" text-decoration:none; font-size:15px; font-family:cursive;" href="#menu">Your Cart <i class="fa fa-shopping-cart" style="font-size:36px; "></i><strong style='margin-bottom:20px;'>{{count}}<strong></a></h2>
+
+							<ul class="links">
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive; ' href="{% url 'home' %}">Home</a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'gallery' %}">Gallery</a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'notification' %}">{% if ncount %} <i class="fas fa-circle" style='color:#FE1414'></i> {% endif %} Notification  </a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'profile' %}">Profile</a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'verification' %}">Verification</a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'upload' %}">Upload</a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive; display:inline;' href="{% url 'advice' %}">Advice Corner<p style='color:orange; font-size:10px; display:inline;'>  New/FREE</p></a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'history' %}">History</a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'logout' %}">Logout</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper" style='background-color: #555867;'>
+						<header>
+							<div class="inner" style='height:200px;'>
+                                <h1 style='margin-left:180px; font-size:60px; font-family:Bradley Hand, cursive; '>SilverChords</h1>
+                                <form action='{% url 'search' %}' method='POST'>
+                                {% csrf_token %}
+                                <div style='margin-left:135px;'>
+								<input type='text' style='width:500px; display:inline;' placeholder="@username/beats/genre" name='search_token' value='{{name}}' >
+                                <input style=' display:inline;' type='submit' value='Search'>
+								</div>
+                                </form>
+							</div>
+						</header>
+
+						<!-- Content -->
+							<div class="wrapper">
+								<div class="inner">
+                                    <div>
+                                        {% if messages %}
+                                        {% for message in messages %}
+                                            <p class="alert alert-{{message.tags}}" role="alert" style='text-align:center;'> {{ message }}</p>
+                                        {% endfor %}
+                                        {% endif %}
+										{% block Main_Content %}{% endblock Main_Content %}
+									</div>
+
+								</div>
+							</div>
+
+					</section>
+
+				<!-- Footer -->
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
 </html>
+
+
+
+
+
+
+

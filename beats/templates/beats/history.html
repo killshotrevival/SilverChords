@@ -1,19 +1,143 @@
 {% load static %}
-{% extends "beats/base.html" %}
-{% block title %}
-    History
-{% endblock title %}
-{% block Main_Content %}
-    <h1>HISTORY</h1>
-    <br>
-    <br>
-    <script src="{% static "main.js" %}" type='text/javascript'></script>
-    {% for history in historys %}
-        <img alt='beat-img' src='{{history.Bid.beat_img.url}}' onclick="location.href='{% url 'historydetail' pk=history.Bid.Bid %}'">
-        <br>
-        <h2>{{history.Bid.beat_name}}</h2>
-        <br>
-        <br>
-    {% endfor %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>History</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href='{% static 'boot/css/bootstrap.min.css' %}' type="text/css" />
+		<script src='{% static 'main.js' %}' type="text/javascript"></script>
+		<script src='{% static 'boot/js/bootstrap.min.js' %}' type="text/javascript"></script>
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<link rel="stylesheet" href="{% static 'assets/css/main1.css' %}" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+		<link rel="stylesheet" href="{% static 'imagehover.css' %}" />
 
-{% endblock Main_Content %}
+
+	</head>
+
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a style='text-decoration: none; font-style: italic; text-transform:lowercase;' href="{% url 'silverchords' %}">SilverChords.Com</a></h1>
+						<nav>
+						{% if ncount or count %}  
+							<a href="#menu">Menu <i class="fas fa-circle" style='color:#FE1414'></i></a>
+						{% else %}
+							<a href="#menu">Menu</a>
+						{% endif %} 
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2><a style=" text-decoration:none; font-size:15px; font-family:cursive;" href="#menu">Your Cart <i class="fa fa-shopping-cart" style="font-size:36px; "></i><strong style='margin-bottom:20px;'>{{count}}<strong></a></h2>
+							<ul class="links">
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive; ' href="{% url 'home' %}">Home</a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'gallery' %}">Gallery</a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'notification' %}">{% if ncount %} <i class="fas fa-circle" style='color:#FE1414'></i> {% endif %} Notification  </a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'profile' %}">Profile</a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'verification' %}">Verification</a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'upload' %}">Upload</a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive; display:inline;' href="{% url 'advice' %}">Advice Corner<p style='color:orange; font-size:10px; display:inline;'>  New/FREE</p></a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'history' %}">History</a></li>
+								<li><a class='text-white' style='text-decoration: none; font-family:cursive;' href="{% url 'logout' %}">Logout</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper" style='background-color: #555867;'>
+						<header>
+							<div class="inner" style='height:200px;'>
+                                <h1 style='margin-left:180px; font-size:60px; font-family:Bradley Hand, cursive; '>SilverChords</h1>
+                                <form action='{% url 'search' %}' method='POST'>
+                                {% csrf_token %}
+                                <div style='margin-left:135px;'>
+								<input type='text' style='width:500px; display:inline;' placeholder="@username/beats/genre" name='search_token' value='{{name}}' >
+                                <input style=' display:inline;' type='submit' value='Search'>
+								</div>
+                                </form>
+							</div>
+						</header>
+
+						<!-- Content -->
+							<div class="wrapper">
+								<div class="inner">
+                                    <script src="{% static "main.js" %}" type='text/javascript'></script>
+                                    <script type="text/javascript" src="{% static "play.js" %}"></script>
+
+                                    <br>
+                                    <br>
+
+                                    <audio controls id='cntl'>
+                                        <source src="" type="audio/wav" >
+                                        Your browser does not support the audio tag.
+                                    </audio>
+									<br>
+									<br>
+									<br>
+                                    <h2 class='pb-1' style='text-align: center; font-size: 2em;'>History</h2>
+									<br>
+									<br>
+                                    <div class='rounded p-1 square scrollbar-light-blue thin' style='width:900px; overflow-x:auto; white-space: nowrap;'>
+											{% for history in historys %}
+														<div class="" style='display: inline-block;'>
+															<div class="col-md-10 col-sm-6 mx-auto" style='width:300px;'>
+																<div class="box">
+																	<img style='height:150px;' src="{{history.Bid.beat_img.url}}">
+																	<div class="box-content" style='white-space:normal;'>
+																		<h3 class="title">{{history.Bid.beat_name}}</h3>
+																		<span class="post fa fa-music"><p style='display:inline;'>  {{history.Bid.listens}}</p></span>
+																	</div>
+																	<ul class="icon">
+																		<li><a href="{% url 'beat-details' pk=history.Bid.Bid %}"><i class="fa fa-search"></i></a></li>
+																		<li><i class="fa fa-play" id='Play_Button' onclick="play('{{history.Bid.beat.url}}', '{{history.Bid.Bid}}','{% url 'playsong' %}')"></i></li>
+																	</ul>
+																</div>
+															
+														</div>
+													</div>
+											{% endfor %}
+										</div>
+                                    
+								</div>
+							</div>
+
+					</section>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="inner">
+							<ul class="copyright">
+								<li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>
+
+
+
+
+
+
+

@@ -17,8 +17,12 @@ function getCookie(name) {
 function play(beatl, Bid, url1) {
     var audio = document.getElementById("cntl");
     audio.src = beatl;
-    audio.load();
-    audio.play();
+    if (!audio.isPlaying) {
+        audio.load();
+        audio.play();
+    } else {
+        audio.pause();
+    }
     //var url1 = $("#Play_Button").attr("data-url");
     var a = parseInt(Bid);
     $.ajax({

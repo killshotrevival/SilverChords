@@ -1,29 +1,173 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset='UTF-8'>
 <title>SilverChords</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'main/home.css' %}" rel="stylesheet" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
 </head>
-<body>
-<img alt='SilverChords Logo' src='/media/cover21.jpg' height='300' weight='400'>
-<br>
-<h1>SilverChords</h1>
-<br>
-<a href='{% url 'login' %}'>Login/SignUp</a>
-<br>
-<h2>What we are doing</h2>
-<br>
-<h3>Monetize your music talent</h3>
-<br>
-<img alt='Buy and Sell Logo' src='/media/cover31.jpg' height='200' weight='600'>
-<br>
-<h3>Online Consultancy</h3>
-<br>
-<img alt='Online Logo' src='/media/cover41.jpg' height='200' weight='600'>
-<br>
-<h3>Song as an assets</h3>
-<br>
-<img alt='Assets Logo' src='/media/cover51.jpg' height='200' weight='600'>
-<br>
-</body>
+<body class="is-preload">
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1><a href="{% url 'silverchords' %}">SilverChords.Com</a></h1>
+						<nav>
+							<a href="#menu">Let's Go</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a style='font-family:cursive;' href="{% url 'silverchords' %}">Home</a></li>
+								<li><a style='font-family:cursive;' href="{% url 'gallery2' %}">Gallery</a></li>
+								<li><a style='font-family:cursive;' href="{% url 'allogin' %}">Log In</a></li>
+								<li><a style='font-family:cursive;' href="{% url 'register' %}">Sign Up</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Banner -->
+					<section id="banner">
+						<div class="inner">
+							<div class="logo"><span class="icon fa-gem"></span></div>
+							<h2 style='font-family:cursive;'>SilverChords.Com</h2>
+							<p style='font-family:cursive;'>Music + Ecommerce + Consultancy +Share Market </p>
+						</div>
+					</section>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+
+						<!-- One -->
+							<section id="one" class="wrapper spotlight style1">
+								<div class="inner">
+									<a href="#" class="image"><img src="/media/images/pic01.jpg" alt="" /></a>
+									<div class="content">
+										<h2 class="major" style='font-family:cursive;'>Buy And Sell</h2>
+										<p style='font-family:cursive;'>Monetize your music taste with us, with literally customers all over the world </p>
+										<!--<a href="#" class="special">Learn more</a>-->
+									</div>
+								</div>
+							</section>
+
+						<!-- Two -->
+							<section id="two" class="wrapper alt spotlight style2">
+								<div class="inner">
+									<a href="#" class="image"><img src="/media/images/pic02.jpg" alt="" /></a>
+									<div class="content">
+										<h2 class="major" style='font-family:cursive;'>Music Consultancy</h2>
+										<p style='font-family:cursive;'>Take the help of our experts who understand the trends, and grow strong in the industry.</p>
+										<!--<a href="#" class="special">Learn more</a>-->
+									</div>
+								</div>
+							</section>
+
+						<!-- Three -->
+							<section id="three" class="wrapper spotlight style3">
+								<div class="inner">
+									<a href="#" class="image"><img src="/media/images/pic03.jpg" alt="" /></a>
+									<div class="content">
+										<h2 class="major" style='font-family:cursive;'>Music As An Assets</h2>
+										<p style='font-family:cursive;'>We are developing a platform where we can trade musics and its elements as in a Stock Market</p>
+										<!--<a href="#" class="special">Learn more</a>-->
+									</div>
+								</div>
+							</section>
+
+						<!-- Four -->
+							<section id="four" class="wrapper alt style1">
+								<div class="inner">
+									<h2 class="major" style='font-family:cursive;'>Coming Soon</h2>
+									<p style='font-family:cursive;'>New ideas we are currently working on, to change the way music industry works..:)</p>
+									<section class="features">
+										<article>
+											<a href="#" class="image"><img src="/media/images/pic04.jpg" alt="" /></a>
+											<h3 class="major" style='font-family:cursive;'>Freelancing</h3>
+											<p style='font-family:cursive;'>We are introducing idea of freelancing works, on a totally new level, which will help our customes to expand their region</p>
+											<!--<a href="#" class="special">Learn more</a>-->
+										</article>
+										<article>
+											<a href="#" class="image"><img src="/media/images/pic05.jpg" alt="" /></a>
+											<h3 class="major" style='font-family:cursive;'>Art Gallery</h3>
+											<p style='font-family:cursive;'>We are introducing a seprate portion on our website on which the users can buy/sell their taste in imagery.</p>
+											<!--<a href="#" class="special">Learn more</a>-->
+										</article>
+									<ul class="actions">
+										<!--<li><a href="#" class="button">Browse All</a></li>-->
+									</ul>
+								</div>
+							</section>
+
+					</section>
+
+				<!-- Footer -->
+				<div>
+				{% if messages %}
+					{% for message in messages %}
+					<p class="alert alert-success" role='alert' style='text-align:center; font-size:40px;'>" {{ message }}"</p>
+					{% endfor %}
+				{% endif %}
+				</div>
+					<section id="footer">
+						<div class="inner">
+							<h2 class="major">Get in touch</h2>
+							<p>Anything you want to communicate with us, we really appreciate your participation.</p>
+							<form method="post" action="{% url 'helpinfo' %}">
+								{% csrf_token %}
+								<div class="fields">
+									<div class="field">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<div class="field">
+										<label for="email">Email</label>
+										<input type="email" name="email" id="email" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="4"></textarea>
+									</div>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</form>
+							<ul class="contact">
+								<li class="icon solid fa-home">
+									Tech Stitch Inc<br />
+									1234 Somewhere Road In Some Country<br />
+								</li>
+								<li class="icon solid fa-phone">(000) 000-0000</li>
+								<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+								<li class="icon brands fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
+								<li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li>
+								<li class="icon brands fa-instagram"><a href="#">instagram.com/untitled-tld</a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
 </html>

@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'jsonify',
     'dajaxice',
     'beats.apps.BeatsConfig',
-    'notification.apps.NotificationConfig',
+    'notifis.apps.NotifisConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

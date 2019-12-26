@@ -14,7 +14,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function noti(username, url1) {
+function noti(username, url1, nnid) {
     $.ajax({
         url: url1, // the endpoint
         type: "POST",
@@ -23,10 +23,15 @@ function noti(username, url1) {
         },
         data: {
             //CSRF: getCSRFTokenValue(),
-            'username': username
+            'username': username,
+            'id': nnid
         },
-        success: function(data) {
-            document.getElementById('data').innerHTML = data
-        }
+        success: function(recieved) {
+            document.getElementById(data).textContent = recieved;
+        },
+        error: function(data) {
+            alert(data);
+        },
     });
+
 }

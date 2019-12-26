@@ -1,0 +1,32 @@
+{% extends "beats/base.html" %}
+
+{% block title %}
+    Verification
+{% endblock title %}
+
+{% block Main_Content %}
+    <h2 class='pb-1' style='text-align: center; font-family:cursive; font-size: 2em;'>Details Verification</h2><br>
+    <form action='.' method='POST' enctype="multipart/form-data" class='col-8' style='margin-left:160px;' >
+    {% csrf_token %}
+    <label for='id_phone' style='font-family:cursive;'>Phone</label>
+    <input type="text" name="phone" maxlength="20" required id="id_phone"><br>
+    <label for="id_email" style='font-family:cursive;'>Email:</label>
+    <input type="email" name="email" value="silever@chords.com" maxlength="254" required id="id_email">
+    <br>
+    <label for="id_vtype" style='font-family:cursive;'>Verification type:</label>
+    <input type="text" name="vtype" maxlength="200" required placeholder='Name of the authority or document' id="id_vtype">
+    <br>
+    <label for="id_vno" style='font-family:cursive;'>Verification No.</label>
+    <input type="text" name="vno" maxlength="100" placeholder='Your uniquely identifing Number' required id="id_vno">
+    <br>
+    <p class="alert alert-secondary" role="alert" style='margin-top:10px; text-align:center;'>Please change the name of the photos, with your username as prefix, such as "silverchords_front.jpg & silverchords_back.jpg"</p>
+    <br><label for='id_front_photo' style='font-family:cursive;'>Front Photo</label>
+    <input type='file' accept='image/*' name='front_photo' id='id_front_photo' required >
+    <br><br><label for='id_back_photo' style='font-family:cursive;'>Back Photo</label>
+    <input type='file' accept='image/*' name='front_photo' id='id_back_photo' required >
+    <br>
+    <br>
+    <input type='submit' value='Upload'>
+    </form>
+{% endblock Main_Content %}
+

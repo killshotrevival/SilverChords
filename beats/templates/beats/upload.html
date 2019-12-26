@@ -5,24 +5,24 @@
 {% endblock title %}
 
 {% block Main_Content %}
+    <h2 class='pb-1' style='text-align: center; font-family:cursive; font-size: 2.5em;'>Upload</h2><br>
     <form action='.' method='POST' enctype="multipart/form-data" >
     {% csrf_token %}
-    <label for='beat'>Upload your file </label>
-    <input type='file' name='beat' accept='audio/*'>
-    <br>  
-    <label for='beat_name'>Beat Name</label>
-    <input type='text' name='beat_name' >
-    <br>
-    <label for='genre'>Genre</label>
-    <input type='text' name='genre'>
-    <br>
-    <label for='beat_desc'>What you want to say about ur work</label><br>
-    <input name='beat_desc' type='text'>
-    <br>
-    <label for='beat_img'>Thumbnail</label>
-    <input type='file' name='beat_img' accept='image/*'>
-    <br>
-    <input type='submit' value='Upload'>
+        <label for="id_beat_name">Beat name:</label><input type="text" name="beat_name" maxlength="100" required="" id="id_beat_name">
+        <br><label for="id_beat">Beat:</label><input type="file" name="beat" accept='audio/*' required="" id="id_beat">
+        <br><br><label for="id_genre">Genre:</label>
+        <select style='width:300px;' name="genre" id="id_genre">
+        <option value="R" selected="">Rock</option>
+        <option value="E">Electric</option>
+        <option value="Hh">Hip Hop</option>
+        <option value="C">Country</option>
+        <option value="t">Techno/trance</option>
+        <option value="Db">Drum And Bass</option>
+        </select>
+        <br><label for="id_beat_img">Beat image:</label><input type="file" accept='image/*' name="beat_img" accept="image/*" required="" id="id_beat_img">
+        <br><br><label for="id_beat_desc">What you want to say about your creation??</label><textarea name="beat_desc" cols="40" rows="5" maxlength="2000" required="" id="id_beat_desc" spellcheck="false"></textarea>
+       <br><label for="id_price">Price:</label><input type="text" style='width:300px;' name="price" min="0" palceholder='$$$$' required id="id_price">
+   <br> <input type='submit' style='margin-left:400px; background-color:#007bff' value='Upload'>
     </form>
 {% endblock Main_Content %}
 

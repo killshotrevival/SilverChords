@@ -1,0 +1,42 @@
+{% extends "beats/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Advice
+{% endblock title %}
+{% block Main_Content %}
+        <h2 class='pb-1' style='text-align: center; margin-right:50px; font-family:cursive; font-size: 2.5em;'>Advice Form</h2>
+        <p style='text-align:center;'>Thank you for your trust</p>
+
+    <form action="." method="POST" >
+    {% csrf_token %}
+
+    <label for="id_platform">Platform:</label>
+    <select name="platform" id="id_platform">
+    <option value="Y" selected="">Youtube</option>
+    <option value="I">Instagram</option>
+    <option value="F">Facebook</option>
+    <option value="S">Snapchat</option></select><br>
+    <label for="id_content">Content:</label>
+    <textarea name="content" cols="40" rows="10" maxlength="1000" required="" id="id_content"></textarea><br>
+    <input type="submit" class="" style="margin-left:400px; background-color:#007bff" value="Post">	
+    </form>	
+   
+
+{% endblock Main_Content %}
+
+
+
+
+
+
+
+
+
+										
+
+
+
+
+

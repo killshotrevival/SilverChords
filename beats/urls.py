@@ -8,9 +8,11 @@ from beats import views
 
 urlpatterns = [
     path('home/', views.home, name='home'),
+    path('gallery/', views.gallery, name='gallery'),
     path('upload/', views.upload, name='upload'),
     path('history/', views.HistoryNameList.as_view(), name='history'),
-    path('beat/<int:pk>/', views.BeatDetailsView.as_view(), name='beat-details'),
+    path('beat/<int:pk>/', views.beatdetails, name='beat-details'),
+    path('cart/<int:pk>/', views.beatcart, name='cart'),
     path('listens/<int:pk>', views.listensupdate, name='listensupdate'),
     path('play/', views.playsonng, name='playsong'),
     path('histdetail/<int:pk>', views.historydetail, name='historydetail'),
