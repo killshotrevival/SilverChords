@@ -17,7 +17,6 @@ from .forms import NotifyForm, helpform, verifiform, adviceform
 def register(request):
     if request.method=='POST':
         form = registerform(request.POST)
-        print(form)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')

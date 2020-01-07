@@ -31,7 +31,7 @@ def home(request):
 
 
 def silverchords(request):
-    return render(request, 'beats/silverchords.html')
+    return render(request, 'beats/index.html')
 
 
 def gallery(request):
