@@ -26,7 +26,7 @@ def home(request):
         if( not ver[0]['verified']):
             if(not ver[0]['veri_submit']):
                 messages.warning(request, 'Please verifi your details to obtain the maximum of our services')
-    return render(request, 'beats/silverchords.html', {'count':count, 'ncount':nc.count(), 'mt':mt, 'ff':ff})
+    return render(request, 'beats/index.html', {'count':count, 'ncount':nc.count(), 'mt':mt, 'ff':ff})
 
 
 
@@ -63,10 +63,10 @@ def search(request):
                 count = count+i.itemcount
             return render(request, 'beats/search.html', {'work':work, 'genres':genres, 'users':user, 'name':search, 'count':count, 'ncount':nc.count()})
         quotea=quote.objects.order_by("?").first()
-        return render(request, 'beats/silverchords_home.html.', {'quote':quotea, 'count':count, 'ncount':nc.count()})
+        return render(request, 'beats/index.html.', {'quote':quotea, 'count':count, 'ncount':nc.count()})
     else:
         quotea=quote.objects.order_by("?").first()
-        return render(request, 'beats/silverchords_home.html.', {'quote':quotea, 'count':count, 'ncount':nc.count()})
+        return render(request, 'beats/index.html.', {'quote':quotea, 'count':count, 'ncount':nc.count()})
 
 @login_required
 def listensupdate(request,pk):

@@ -135,12 +135,12 @@ def helpinfofun(request):
             hi = helpinfo(name=name, email=email, message=message)
             hi.save()
             messages.add_message(request, messages.SUCCESS, 'Message Sent')
-            return render(request, 'beats/silverchords.html')
+            return render(request, 'beats/index.html')
 
         else:
-            return render(request, 'beats/silverchords.html')
+            return render(request, 'beats/index.html')
     else:
-        return render(request, 'beats/silverchords.html')
+        return render(request, 'beats/index.html')
 @login_required
 def verifi(request):
     count=0
