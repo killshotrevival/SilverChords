@@ -1,17 +1,24 @@
-{% extends "beats/base.html" %}
+{% extends "users/verification.html" %}
+
+{% load static %}
+
+{% block title2 %}
+Upload
+{% endblock title2 %}
 
 {% block title %}
-    Upload
+    SilverChords Upload
 {% endblock title %}
 
 {% block Main_Content %}
-    <h2 class='pb-1' style='text-align: center; font-family:cursive; font-size: 2.5em;'>Upload</h2><br>
-    <form action='.' method='POST' enctype="multipart/form-data" >
+    <form method="post" style='width:30em; margin-left:8em;' action='.' enctype="multipart/form-data">
     {% csrf_token %}
-        <label for="id_beat_name">Beat name:</label><input type="text" name="beat_name" maxlength="100" required="" id="id_beat_name">
-        <br><label for="id_beat">Beat:</label><input type="file" name="beat" accept='audio/*' required="" id="id_beat">
+        <label for="id_beat_name">Beat name:</label>
+        <input type="text" class="form-control" name="beat_name" maxlength="100" required="" id="id_beat_name">
+        <br><label for="id_beat">Beat:</label>
+        <br><input  type="file" name="beat" accept='audio/*' required="" id="id_beat">
         <br><br><label for="id_genre">Genre:</label>
-        <select style='width:300px;' name="genre" id="id_genre">
+        <select class="form-control" style='width:300px;' name="genre" id="id_genre">
         <option value="R" selected="">Rock</option>
         <option value="E">Electric</option>
         <option value="Hh">Hip Hop</option>
@@ -19,10 +26,13 @@
         <option value="t">Techno/trance</option>
         <option value="Db">Drum And Bass</option>
         </select>
-        <br><label for="id_beat_img">Beat image:</label><input type="file" accept='image/*' name="beat_img" accept="image/*" required="" id="id_beat_img">
-        <br><br><label for="id_beat_desc">What you want to say about your creation??</label><textarea name="beat_desc" cols="40" rows="5" maxlength="2000" required="" id="id_beat_desc" spellcheck="false"></textarea>
-       <br><label for="id_price">Price:</label><input type="text" style='width:300px;' name="price" min="0" palceholder='$$$$' required id="id_price">
-   <br> <input type='submit' style='margin-left:400px; background-color:#007bff' value='Upload'>
+        <br><label for="id_beat_img">Beat image:</label>
+        <br><input type="file" accept='image/*' name="beat_img" accept="image/*" required="" id="id_beat_img">
+        <br><br><label for="id_beat_desc">What you want to say about your creation??</label>
+        <p><textarea class="form-control" name="beat_desc" cols="40" rows="5" maxlength="2000" required="" id="id_beat_desc" spellcheck="false"></textarea></p>
+       <br><label for="id_price">Price:</label>
+       <input class='form-control' type="text" style='width:300px;' name="price" min="0" palceholder='$$$$' required id="id_price">
+   <br> <br><input style='margin-left:12em;' type='submit' value='Upload'>
     </form>
 {% endblock Main_Content %}
 

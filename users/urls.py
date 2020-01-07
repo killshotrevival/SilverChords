@@ -15,8 +15,7 @@ urlpatterns = [
     path('notification/<int:pk>', users_views.notif, name='notify'),
     path('advice/', users_views.advice_view, name='advice'),
     path('deleteb/<int:pk>', users_views.deleteb, name='deletebeat'),
-    path('allogin', users_views.alllogin, name='allogin'),
     path('userinfo/<int:pk>/', users_views.UserDetailsView.as_view(), name='userinfo'),
-    path('login/',auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),    
+    path('login/',auth_views.LoginView.as_view(template_name='users/register.html'), name='login'),    
     path('logout/',users_views.logout_view, name='logout'), 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

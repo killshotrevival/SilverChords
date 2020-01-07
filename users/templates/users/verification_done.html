@@ -1,11 +1,15 @@
-{% extends "beats/base.html" %}
+{% extends "users/verification.html" %}
+
+{% load static %}
 
 {% block title %}
-    Verification
+Verification Details
 {% endblock title %}
 
-{% block Main_Content %}
-    <h2 class='pb-1' style='text-align: center; font-family:cursive; font-size: 2em;'>Verification Under Process</h2><br>
-    <p class="alert alert-secondary" role="alert" style='margin-top:10px; text-align:center;'>"We have recieved your details. The processing will take some time, we really appreciate your cooperation. Thank you."</p>
-{% endblock Main_Content %}
+{% block title2 %}
+Verification Details
+{% endblock title2 %}
 
+{% block Main_Content %}
+<p style='font-size:2em; text-align:center;'> We are verifying your details. Thank You for your cooperation</p> 
+{% endblock Main_Content %}

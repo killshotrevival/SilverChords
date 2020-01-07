@@ -1,16 +1,21 @@
-{% extends "beats/base.html" %}
+{% extends "users/verification.html" %}
 
 {% block title %}
     Edit Beat
 {% endblock title %}
 
+{% block title2 %}
+        Beat Info Edit
+{% endblock title2 %}
+
 {% block Main_Content %}
     <h2 class='pb-1' style='text-align: center; font-family:cursive; font-size: 2.5em;'>Edit Beat Info</h2><br>
     <form action='{% url 'editbeat' Bid  %}' method='POST' enctype="multipart/form-data" >
     {% csrf_token %}
-        <label for="id_beat_name">Beat name:</label><input type="text" name="beat_name" value="Baggi intro" maxlength="100" required="" id="id_beat_name">
+        <label for="id_beat_name">Beat name:</label>
+        <input type="text" class='form-control' name="beat_name" value="Baggi intro" maxlength="100" required="" id="id_beat_name">
         <br><label for="id_genre">Genre:</label>
-        <select name="genre" style='width:300px;' id="id_genre">
+        <select class='form-control' name="genre" style='width:300px;' id="id_genre">
         <option value="R">Rock</option>
         <option value="E">Electric</option>
         <option value="Hh">Hip Hop</option>
@@ -18,9 +23,10 @@
         <option value="t">Techno/trance</option>
         <option value="Db">Drum And Bass</option>
         </select>
-        <br><label for="id_beat_desc">Beat desc:</label><textarea name="beat_desc" cols="40" rows="5" maxlength="2000" required="" id="id_beat_desc">dhkdadqwhdqwdq</textarea>
-        <br><label for="id_price" >Price:</label>
-        <input type="text" name="price" required="" value='&#x20b9; {{price}}' style='width:300px;' id="id_price">
-   <br> <input type='submit' style='margin-left:400px; background-color:#007bff' value='Upload'>
+        <br><label for="id_beat_desc">Beat desc:</label>
+        <p><textarea class='form-control' name="beat_desc" cols="40" rows="5" maxlength="2000" required="" id="id_beat_desc">dhkdadqwhdqwdq</textarea></p>
+        <label for="id_price" >Price:</label>
+        <input class='form-control' type="text" name="price" required="" value='&#x20b9; {{price}}' style='width:300px;' id="id_price">
+   <br> <input type='submit' style=' margin-left:20em; background-color:#007bff' value='Upload'>
     </form>
 {% endblock Main_Content %}

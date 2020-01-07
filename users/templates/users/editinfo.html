@@ -1,29 +1,39 @@
-{% extends "beats/base.html" %}
+{% extends "users/verification.html" %}
 
 {% block title %}
     EDIT PERSONAL INFO
 {% endblock title %}
 
+{% block title2 %}
+        Personal Info Edit
+{% endblock title2 %}
+
 {% block Main_Content %}
-    <h2 class='pb-1' style='text-align: center; font-family:cursive; font-size: 2.5em;'>Edit Info Page</h2><br>
     <form action='.' method='POST' enctype="multipart/form-data">
     {% csrf_token %}
     <img alt='user image' src="{{user.profile.artist_photo.url}}" style='height:5em; width:5em;'>
     <label for='id_artist_photo' style='font-family:cursive; font-size:15px;'>Change Profile</label>
     <input type='file' name='artist_photo' accept='image/*' id='id_artist_photo'><br><br>
+
     <img alt='user cover' src="{{user.profile.cover_photo.url}}" style='height:5em; width:5em;'>
     <label for='id_cover_photo' style='font-family:cursive; font-size:15px;'>Change Cover</label>
     <input type='file' name='cover_photo' accept='image/*' id='id_cover_photo'><br><br>
+
     <label for='id_place' style='font-family:cursive; font-size:15px;'>Place</label>
-    <input style='font-family:cursive;' type='text' name='place' value='{{user.profile.place}}' id='id_place'>
+    <input style='font-family:cursive;' class='form-control' type='text' name='place' value='{{user.profile.place}}' id='id_place'>
+
     <br><label for='id_desc' style='font-family:cursive; font-size:15px;'>About You</label>
-    <textarea style='font-family:cursive;' name='desc' cols='40' rows='8' maxlength= '2000'required id='id_desc'>{{user.profile.desc}}</textarea>
+    <p><textarea style='font-family:cursive;' class='form-control' name='desc' cols='40' rows='8' maxlength= '2000'required id='id_desc'>{{user.profile.desc}}</textarea></p>
+    
     <br><label style='font-family:cursive; font-size:15px;' for='id_fb'>Facebook</label>
-    <input style='font-family:cursive;' type='text' name='fb' value='{{user.profile.fb}}' id='id_fb'>
+    <input style='font-family:cursive;' class='form-control' type='text' name='fb' value='{{user.profile.fb}}' id='id_fb'>
+    
     <br><label style='font-family:cursive; font-size:15px;' for='id_insta'>Instagram</label>
-    <input style='font-family:cursive;' type='text' name='insta' value='{{user.profile.insta}}' id='id_insta'>
+    <input style='font-family:cursive;' class='form-control' type='text' name='insta' value='{{user.profile.insta}}' id='id_insta'>
+    
     <br><label style='font-family:cursive;font-size:15px;' for='id_youtube'>Youtube</label>
-    <input style='font-family:cursive;' type='text' name='youtube' value='{{user.profile.youtube}}' id='id_youtube'>
+    <input style='font-family:cursive;' class='form-control' type='text' name='youtube' value='{{user.profile.youtube}}' id='id_youtube'>
+    
     <br><input style='font-family:cursive;' type='submit' value='Save'>
     </form>
 {% endblock Main_Content %}

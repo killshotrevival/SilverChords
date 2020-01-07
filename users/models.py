@@ -56,11 +56,12 @@ class helpinfo(models.Model):
 class advice(models.Model):
     a_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    platform = models.CharField(default='Y', max_length=20,choices=[
+    platform = models.CharField(default='U', max_length=20,choices=[
         ('Y','Youtube'),
         ('I','Instagram'),
         ('F','Facebook'),
         ('S','Snapchat'),
+        ('U', 'Us')
         ])
     content = models.TextField(max_length=1000)
 

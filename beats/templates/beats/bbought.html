@@ -1,0 +1,41 @@
+{% extends "users/verification.html" %}
+
+{% block title %}
+    Beats Bought
+{% endblock title %}
+
+{% block title2 %}
+        Buying History
+{% endblock title2 %}
+
+{% block Main_Content %}
+    
+{% if beats.count %}
+    <div class="maincontent-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="latest-product">
+                        <div class="product-carousel" style='width:55em;'>						
+							{% for beat in beats  %}
+                            <div class="single-product">
+                                <div class="product-f-image">
+                                    <img src="{{beat.b_img.url}}" style='height:16em; ' alt="">
+                                </div>
+                                <h2><a href="" style='text-decoration:none;'>{{beat.b_name}}</a></h2>
+                                
+                                <div class="product-carousel-price">
+                                    <ins><i class="fa fa-download" style="font-size:0.8em; "></i><a href='' style="font-size:0.8em;"> Download Agreement</a></ins><br>
+                                </div> 
+                            </div>
+							{% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+{% endblock Main_Content %}

@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from beats.models import cart
+from beats.models import cart, work_info
 
 
 @method_decorator(login_required, name='dispatch')
@@ -24,14 +24,17 @@ class notificationListView(ListView):
         nc = notifi.objects.filter(owner_id=self.request.user.id)
         for i in c2:
             count = count+i.itemcount
+        ff = work_info.objects.all().order_by('?')[:4]
         context = {
             'notifications' : con, 
             'count':count,
+            'ff':ff,
             'ncount': nc.count()
         }
         return context
 
 def delete(request,pk):
+    ff = work_info.objects.all().order_by('?')[:4]
     count=0
     c2 = cart.objects.filter(user_id=request.user.id)
     nc = notifi.objects.filter(owner_id=request.user.id)
@@ -43,6 +46,6 @@ def delete(request,pk):
         username = User.objects.filter(id = c['user']).values('username', 'id')
         c['user'] = username[0]['username']
         c['id'] = username[0]['id']
-    return render(request, 'notifis/home.html', {'notifications' : con, 'count': count, 'ncount':nc.count()})
+    return render(request, 'notifis/home.html', {'ff':ff, 'notifications' : con, 'count': count, 'ncount':nc.count()})
 
     

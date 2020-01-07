@@ -13,7 +13,7 @@ urlpatterns = [
     path('galleryouter/', users_views.galleryouter, name='gallery2'),
     path('beats/', include('beats.urls')),
     path('users/', include('users.urls')),
-    path('',beats_views.silverchords, name='silverchords'),
+    path('',beats_views.home, name='silverchords'),
     path('help/', users_views.helpinfofun, name='helpinfo'),
     path('notifications/list', include('notifis.urls')),   
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -14,7 +14,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function play(beatl, Bid, url1) {
+function play(beatl, name, img, Bid, url1) {
     var audio = document.getElementById("cntl");
     audio.src = beatl;
     if (!audio.isPlaying) {
@@ -23,6 +23,15 @@ function play(beatl, Bid, url1) {
     } else {
         audio.pause();
     }
+    if (name.length > 15) {
+
+        var res = name.substr(0, 15);
+        document.getElementById("songname").innerText = res + '...';
+    } else {
+        document.getElementById("songname").innerText = name;
+    }
+
+    $('#id1').attr('src', img);
     //var url1 = $("#Play_Button").attr("data-url");
     var a = parseInt(Bid);
     $.ajax({

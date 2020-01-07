@@ -1,25 +1,28 @@
-{% extends "beats/base.html" %}
+{% extends "users/verification.html" %}
 
 {% load static %}
 
 {% block title %}
     Advice
 {% endblock title %}
+
+{% block title2 %}
+    Advice Corner
+{% endblock title2 %}
 {% block Main_Content %}
-        <h2 class='pb-1' style='text-align: center; margin-right:50px; font-family:cursive; font-size: 2.5em;'>Advice Form</h2>
-        <p style='text-align:center;'>We will do our best to provide you the maximum profit. Thank you for your trust</p>
+        <p style='text-align:center; font-size:1.3em; font-weight:700;'>We will do our best, to provide you the maximum profit.<br> Thank you for your trust</p>
 
-    <form action="." method="POST" >
+    <form method="post" style='width:30em; margin-left:8em;' action='.'>
     {% csrf_token %}
-
-    <label for="id_platform">Platform:</label>
-    <select name="platform" id="id_platform">
-    <option value="Y" selected="">Youtube</option>
+    <label for="id_platform">Platform:</label><br>
+    <select name="platform" style='width:10em;' id="id_platform">
+    <option value="U" selected="">SilverChords</option>
+    <option value="Y">Youtube</option>
     <option value="I">Instagram</option>
     <option value="F">Facebook</option>
     <option value="S">Snapchat</option></select><br>
-    <label for="id_content">Content:</label>
-    <textarea name="content" cols="40" rows="10" maxlength="1000" required="" id="id_content"></textarea><br>
+    <br><label for="id_content">Content:</label>
+    <p><textarea name="content" cols="60" rows="10" maxlength="1000" required="" id="id_content"></textarea></p><br>
     <input type="submit" class="" style="margin-left:400px; background-color:#007bff" value="Post">	
     </form>	
    

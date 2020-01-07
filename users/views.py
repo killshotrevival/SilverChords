@@ -17,6 +17,7 @@ from .forms import NotifyForm, helpform, verifiform, adviceform
 def register(request):
     if request.method=='POST':
         form = registerform(request.POST)
+        print(form)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -24,13 +25,18 @@ def register(request):
             login(request, user[0])
             messages.success(request, f'Account Created for {username}!')
             messages.success(request, 'Go to the Edit Info Page and Update your details :)')
-            return redirect('home')
+            return redirect('editinfo')
         else:
-            error = form.errors
-            return render(request, 'users/register.html', {'form': form, 'error': error})
+            errors = form.errors
+            for error in errors:
+                if error[0]=='p':
+                    messages.warning(request, "Error in your passsword field")
+                elif error[0]=='u':
+                    messages.warning(request, "Username already exist")
+            return render(request, 'users/register.html')
     else:
         form = registerform()
-        return render(request, 'users/register.html', {'form': form})
+        return render(request, 'users/register.html')
 
 @login_required
 def user_profile(request):
@@ -41,16 +47,18 @@ def user_profile(request):
     nc = notifi.objects.filter(owner_id=request.user.id)
     beats = work_info.objects.filter(user_id=request.user.id)
     veri = profile.objects.filter(user_id=request.user.id).values('verified', 'veri_submit')
+    ff = work_info.objects.all().order_by('?')[:4]
     if( not veri[0]['verified']):
         if(not veri[0]['veri_submit']):
             messages.success(request, 'Please verifi your details to obtain the maximum of our services')
-    return render(request, 'users/profile.html', {'beats': beats, 'count':count, 'ncount':nc.count()})
+    return render(request, 'users/profile.html', {'beats': beats, 'count':count, 'ncount':nc.count(), 'fu':ff})
 
 @login_required
 def edit(request):
     count=0
     c2 = cart.objects.filter(user_id=request.user.id)
     nc = notifi.objects.filter(owner_id=request.user.id)
+    ff = work_info.objects.all().order_by('?')[:4]
     for i in c2:
         count = count+i.itemcount
     if request.method=='POST':
@@ -60,15 +68,15 @@ def edit(request):
             return redirect('profile')
         else:
             messages.warning(request, 'Some errors in the input, please try again..')
-            return render(request, 'users/profile.html', {'count':count, 'ncount':nc.count()})
+            return redirect('profile')
     else:
         form = InfoUpdateForm(instance=request.user.profile)
-        return render(request, 'users/editinfo.html', {'form': form, 'count':count, 'ncount':nc.count()})
+        return render(request, 'users/editinfo.html', {'form': form, 'count':count, 'ncount':nc.count(), 'ff':ff})
 
 
 def logout_view(request):
     logout(request)
-    return render(request, 'users/login.html')
+    return redirect('login')
 
 def galleryouter(request):
     return render(request, 'beats/gallery_outer.html')
@@ -136,6 +144,10 @@ def helpinfofun(request):
         return render(request, 'beats/silverchords.html')
 @login_required
 def verifi(request):
+    count=0
+    c2 = cart.objects.filter(user_id=request.user.id)
+    for i in c2:
+        count = count+i.itemcount
     nc = notifi.objects.filter(owner_id=request.user.id)
     if(not request.user.profile.veri_submit):
         if request.method=="POST":
@@ -148,20 +160,29 @@ def verifi(request):
                 veri = verification(user_id=request.user.id, phone=phone, email=email, vtype=vtype, vno=vno)
                 veri.save()
                 request.user.profile.verichange()
-                return render(request, 'users/verification_done.html')
+                ff = work_info.objects.all().order_by('?')[:4]
+                return render(request, 'users/verification_done.html', {'ff':ff})
             else:
                 messages.add_message(request, messages.WARNING, 'Some error occuried during uploading your details, please try after some time.')
                 form = verifiform()
-                return render(request, 'users/verification.html', {'form':form, 'ncount':nc.count()})
+                ff = work_info.objects.all().order_by('?')[:4]
+                return render(request, 'users/verification.html', {'form':form, 'ncount':nc.count(), 'ff':ff, 'count':count })
 
         else:
             form = verifiform()
-            return render(request, 'users/verification.html', {'form':form, 'ncount':nc.count()})
+            ff = work_info.objects.all().order_by('?')[:4]
+            return render(request, 'users/verification.html', {'form':form, 'ff':ff, 'ncount':nc.count(), 'count':count})
     else:
-        return render(request, 'users/verification_done.html', {'ncount':nc.count()})
+        ff = work_info.objects.all().order_by('?')[:4]
+        return render(request, 'users/verification_done.html', {'ncount':nc.count(), 'ff':ff, 'count':count})
 
 @login_required
 def advice_view(request):
+    count=0
+    c2 = cart.objects.filter(user_id=request.user.id)
+    for i in c2:
+        count = count+i.itemcount
+    nc = notifi.objects.filter(owner_id=request.user.id)
     if request.method=='POST':
         form = adviceform(request.POST)
         if form.is_valid():
@@ -169,13 +190,16 @@ def advice_view(request):
             content = form.cleaned_data.get('content')
             ad = advice(user_id=request.user.id, platform=platform, content=content)
             ad.save()
+            ff = work_info.objects.all().order_by('?')[:4]
             messages.success(request, "Your request has been posted successfully, we will get back to you soon. Don't forget to check your notification box regulary. We will do our best to help you ")
-            return render(request, 'users/advice.html')
+            return render(request, 'users/advice.html', {'ncount':nc.count(), 'ff':ff, 'count':count})
         else:
+            ff = work_info.objects.all().order_by('?')[:4]
             messages.warning(request, 'Some problem occuried while, uploading your form, please try again.')
-            return render(request, 'users/advice.html')
+            return render(request, 'users/advice.html', {'ncount':nc.count(), 'ff':ff, 'count':count})
     else:
-        return render(request, 'users/advice.html')
+        ff = work_info.objects.all().order_by('?')[:4]
+        return render(request, 'users/advice.html', {'ncount':nc.count(), 'ff':ff, 'count':count})
 @login_required
 def deleteb(request, pk):
     work_info.objects.filter(Bid=pk).delete()
@@ -191,23 +215,19 @@ def deleteb(request, pk):
             messages.success(request, 'Please verifi your details to obtain the maximum of our services')
     return render(request, 'users/profile.html', {'beats': beats, 'count':count, 'ncount':nc.count()})
 
-def alllogin(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    else:
-        return redirect('login')
 
 @login_required
 def editb(request, pk):
     count=0
     c2 = cart.objects.filter(user_id=request.user.id)
     nc = notifi.objects.filter(owner_id=request.user.id)
+    ff = work_info.objects.all().order_by('?')[:4]
+    w = work_info.objects.filter(Bid=pk)
     for i in c2:
         count = count+i.itemcount
     if request.method=='POST':
         form1 = BeatUpdateForm(request.POST, request.FILES)
         if form1.is_valid():
-            w = work_info.objects.filter(Bid=pk)
             name = form1.cleaned_data.get('beat_name')
             w[0].editn(name)
             genre = form1.cleaned_data.get('genre')
@@ -219,7 +239,7 @@ def editb(request, pk):
             return redirect('profile')
         else:
             messages.warning(request, 'Some errors in the input, please try again..')
-            return render(request, 'users/profile.html', {'count':count, 'ncount':nc.count()})
+            return redirect('profile')
     else:
         w = work_info.objects.filter(Bid=pk)
-        return render(request, 'beats/editbeatinfo.html', {'count':count, 'ncount':nc.count(), 'Bid': w[0].Bid, 'price':w[0].price})
+        return render(request, 'beats/editbeatinfo.html', {'count':count, 'ncount':nc.count(), 'ff':ff, 'Bid': w[0].Bid, 'price':w[0].price})

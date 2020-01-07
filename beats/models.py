@@ -83,6 +83,15 @@ class cart(models.Model):
     def __str__(self):
         return f'{self.user.username} cart has {self.Bid.beat_name} {self.itemcount}'
 
-    def coutninc(self):
-        self.itemcount = self.itemcount+1
-        self.save()    
+    def coutninc(self, v1):
+        self.itemcount = self.itemcount+v1
+        self.save()  
+
+class bought(models.Model):
+    bbid = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    b_name = models.CharField(max_length=100)
+    b_img = models.ImageField(upload_to='bb_img')
+
+    def __str__(self):
+        return f'{self.user.username} bought {self.b_name}'

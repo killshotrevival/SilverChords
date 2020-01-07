@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 10px;
 }
 
 
@@ -7,13 +7,12 @@
 
  ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 2px grey;
-    border-radius: 5px;
 }
 
 
 /* Handle */
 
  ::-webkit-scrollbar-thumb {
-    background: white;
+    background: rgb(92, 117, 230);
     border-radius: 5px;
 }
